@@ -1,24 +1,44 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from "react";
 
 function App() {
+
+  const[number, setNumber] = useState(0);
+  const[double, setDouble] = useState(0);
+
+  useEffect (() => {
+    console.log("Use effect triggered")
+    setDouble(number * 2);
+  }, []);
+
+  const increment = (event) => {
+    event.preventDefault();
+    const newNumber = number + 1;
+    setNumber(newNumber);
+    // const newDouble = newNumber * 2; 
+    // setDouble(newDouble);
+  };
+
+  const decrement = (event) => {
+    event.preventDefault();
+    const newNumber = number - 1;
+    setNumber(newNumber);
+    // const newDouble = newNumber * 2; 
+    // setDouble(newDouble);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <p>{number}</p>
+    <p>{double}</p>
+    <form onSubmit={increment}>
+      <input type="submit" value="Increment"/>
+    </form>
+    <form onSubmit={decrement}>
+      <input type="submit" value="Decrement"/>
+    </form>
+  </>
   );
 }
 
